@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+/* default style starts */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+  list-style: none;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+}
+
+.layout_design {
+  min-height: 100vh;
+}
+
+:root {
+  --gradientColor: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+}
+/* default style ends */
+
+/* header component style starts */
+.brandlogo {
+  width: 80px;
+}
+/* header component style ends */
+
+/* signup section components starts */
+.signup_section {
+  width: 100vw;
+  background: var(--gradientColor);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* signup section components endss */
