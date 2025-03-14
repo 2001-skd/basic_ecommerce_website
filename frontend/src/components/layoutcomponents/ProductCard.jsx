@@ -113,7 +113,7 @@ const ProductCard = () => {
                   background="#5e885a"
                   onClick={() => {
                     if (token) {
-                      addToCart(value);
+                      addTocart(value);
                     } else {
                       alert("Login First");
                     }
