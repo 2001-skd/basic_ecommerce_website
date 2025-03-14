@@ -17,7 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import GreenBgButton from "../uicomponents/GreenBgButton";
 import UserProfile from "../uicomponents/UserProfile";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 import ParagraphText from "../uicomponents/ParagraphText";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useAppContext } from "../../context/AppContext";
@@ -26,8 +26,10 @@ const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const pages = ["Home", "Menu", "Contact Us", "About Us"];
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
-  const { cart } = useAppContext();
+  const settings = ["Logout"];
+  const { cart, token } = useAppContext(); // Make sure to get setToken if you're managing it in context
+  const user = JSON.parse(localStorage.getItem("userDetails"));
+  const navigate = useNavigate(); // useNavigate for redirecting after logout
 
   const handleOpenMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,6 +45,14 @@ const Header = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  // Handle Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userDetails");
+
+    navigate("/login");
   };
 
   return (
@@ -103,17 +113,15 @@ const Header = () => {
               alignItems: "center",
             }}
           >
-            <Link to="/login">
-              <GreenBgButton width="180px" background="green">
-                Login
-              </GreenBgButton>
-            </Link>
-
-            <UserProfile
-              onClick={handleOpenUserMenu}
-              title="Santhakumar"
-              // src={brandLogo}
-            />
+            {token ? (
+              <UserProfile onClick={handleOpenUserMenu} title={user?.name} />
+            ) : (
+              <Link to="/login">
+                <GreenBgButton width="180px" background="#5e885a">
+                  Login
+                </GreenBgButton>
+              </Link>
+            )}
 
             <Menu
               sx={{ mt: "45px" }}
@@ -132,7 +140,12 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={
+                    setting === "Logout" ? handleLogout : handleCloseUserMenu
+                  }
+                >
                   <Typography key={setting} component="a" href="#">
                     {setting}
                   </Typography>
@@ -149,11 +162,7 @@ const Header = () => {
               justifyContent: "flex-end",
             }}
           >
-            <UserProfile
-              onClick={handleOpenUserMenu}
-              title="Santhakumar"
-              // src={brandLogo}
-            />
+            <UserProfile onClick={handleOpenUserMenu} title={user?.name} />
 
             {/* User Menu for Mobile */}
             <Menu
@@ -173,7 +182,12 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  onClick={
+                    setting === "Logout" ? handleLogout : handleCloseUserMenu
+                  }
+                >
                   <Typography sx={{ textAlign: "center" }}>
                     {setting}
                   </Typography>

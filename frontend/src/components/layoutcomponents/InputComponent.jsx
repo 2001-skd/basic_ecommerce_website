@@ -17,6 +17,7 @@ const InputComponent = ({
   }
   return (
     <TextField
+      endad="true"
       type={type === "password" ? (showPassword ? "text" : "password") : type}
       value={value}
       onChange={onChange}
@@ -49,7 +50,6 @@ const InputComponent = ({
           </>
         ),
       }}
-      endad
       InputLabelProps={{
         sx: {
           // Custom font and color for the label

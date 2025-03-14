@@ -17,7 +17,8 @@ import { useAppContext } from "../../context/AppContext";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 const ProductCard = () => {
-  const { menu, setMenu, addTocart, cart, removeFromCart } = useAppContext();
+  const { menu, setMenu, addTocart, cart, removeFromCart, token } =
+    useAppContext();
   console.log("cart", cart);
 
   const isInCart = (id) => cart.some((cartItem) => cartItem.id === id);
@@ -111,7 +112,11 @@ const ProductCard = () => {
                 <GreenBgButton
                   background="#5e885a"
                   onClick={() => {
-                    addTocart(value);
+                    if (token) {
+                      addToCart(value);
+                    } else {
+                      alert("Login First");
+                    }
                   }}
                 >
                   Add To Cart

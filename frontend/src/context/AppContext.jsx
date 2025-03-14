@@ -5,6 +5,7 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [menu, setMenu] = useState([]);
   const [cart, setCart] = useState([]);
+  const token = localStorage.getItem("token");
 
   function addTocart(item) {
     return setCart((prevCart) => [...prevCart, { ...item, quantity: 1 }]);
@@ -50,6 +51,7 @@ export const AppProvider = ({ children }) => {
         addQuantity,
         decreaseQuantity,
         netPrice,
+        token,
       }}
     >
       {children}

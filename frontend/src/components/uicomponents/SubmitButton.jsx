@@ -4,6 +4,7 @@ import React from "react";
 const SubmitButton = ({ children, onClick }) => {
   return (
     <Button
+      type="submit"
       variant="contained"
       onClick={onClick}
       fullWidth
