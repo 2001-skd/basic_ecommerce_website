@@ -1,17 +1,18 @@
 import React from "react";
 import { Button } from "@mui/material";
 
-const GreenBgButton = ({ children, width }) => {
+const GreenBgButton = ({ children, width, onClick, background }) => {
   return (
     <Button
+      onClick={onClick}
       sx={{
-        background: "#5e885a",
+        background: background,
         fontFamily: '"Outfit", sans-serif',
 
         color: "white",
         width: { width },
         "&:hover": {
-          background: "#4a6d48",
+          background: background,
         },
       }}
     >

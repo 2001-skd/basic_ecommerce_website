@@ -40,3 +40,10 @@ a {
 }
 
 /* signup section components endss */
+
+/* menu page component starts */
+.menu_page {
+  padding: 20px !important;
+  margin-top: 20px;
+}
+/* menu page component ends */

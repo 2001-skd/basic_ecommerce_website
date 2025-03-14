@@ -10,6 +10,7 @@ import {
   Tooltip,
   IconButton,
   Menu,
+  Chip,
 } from "@mui/material";
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -18,12 +19,15 @@ import GreenBgButton from "../uicomponents/GreenBgButton";
 import UserProfile from "../uicomponents/UserProfile";
 import { Link } from "react-router-dom";
 import ParagraphText from "../uicomponents/ParagraphText";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useAppContext } from "../../context/AppContext";
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const pages = ["Home", "Menu", "Contact Us", "About Us", "Catering"];
+  const pages = ["Home", "Menu", "Contact Us", "About Us"];
   const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const { cart } = useAppContext();
 
   const handleOpenMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -84,6 +88,10 @@ const Header = () => {
                 {value}
               </Typography>
             ))}
+
+            <Link to="/cart">
+              <Chip icon={<AddShoppingCartIcon />} label={cart.length} />
+            </Link>
           </Box>
 
           {/* Login Button & Avatar (Desktop) */}
@@ -96,7 +104,9 @@ const Header = () => {
             }}
           >
             <Link to="/login">
-              <GreenBgButton width="180px">Login</GreenBgButton>
+              <GreenBgButton width="180px" background="green">
+                Login
+              </GreenBgButton>
             </Link>
 
             <UserProfile
